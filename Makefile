@@ -15,7 +15,7 @@ OBJ = $(SRC:.c=.o)
 
 #change in CMakeLists.txt --> cmake_minimum_required (VERSION 3.16.0)
 
-all: submodule $(LIBFT) $(FTPRINTF) $(NAME)
+all: submodule mlx_build $(LIBFT) $(FTPRINTF) $(NAME)
 
 linux :
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(FTPRINTF) $(MLX42_LINUX)
@@ -29,6 +29,11 @@ debug : all
 submodule :
 	git submodule init
 	git submodule update
+
+mlx_build :
+	sed -i 's/^cmake_minimum_required (VERSION 3.18.0)/cmake_minimum_required (VERSION 3.16.0)/g' MLX42/CMakeLists.txt
+	cmake ./MLX42 -B ./MLX42/build
+	cmake --build ./MLX42/build -j4
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
