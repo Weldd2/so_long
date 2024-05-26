@@ -2,4 +2,3 @@ so_long
 *.json
 .vscode
 *.o
-valgrind_files
