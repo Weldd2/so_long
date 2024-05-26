@@ -15,7 +15,7 @@ OBJ = $(SRC:.c=.o)
 
 #change in CMakeLists.txt --> cmake_minimum_required (VERSION 3.16.0)
 
-all: $(LIBFT) $(FTPRINTF) $(NAME)
+all: submodule $(LIBFT) $(FTPRINTF) $(NAME)
 
 linux :
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(FTPRINTF) $(MLX42_LINUX)
@@ -25,6 +25,10 @@ mac :
 
 debug : all
 	valgrind --keep-debuginfo=yes --leak-check=full --suppressions=valgrind_files/mlx42.supp ./so_long carte.ber
+
+submodule :
+	git submodule init
+	git submodule update
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
