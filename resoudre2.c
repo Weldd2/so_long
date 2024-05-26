@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:46:11 by antoinemura       #+#    #+#             */
-/*   Updated: 2024/04/13 15:45:24 by amura            ###   ########.fr       */
+/*   Updated: 2024/05/26 11:06:09 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	est_resoluble(t_map *map)
 	i = -1;
 	while (++i < map->y_l)
 		tiles_cpy[i] = ft_strdup(map->tiles[i]);
-	map_cpy = init_map(tiles_cpy, map->y_l, map->x_l, 0);
+	map_cpy = init_map(tiles_cpy, map->y_l, map->x_l);
 	mlx = NULL;
 	map_cpy->mlx = mlx;
 	map_cpy->p_x = map->p_x;
@@ -79,7 +79,6 @@ int	est_resoluble(t_map *map)
 	map_cpy->c_count = map->c_count;
 	map_cpy->e_count = map->e_count;
 	i = resoudre(map_cpy);
-	free_tiles_img(map);
 	free_map(map_cpy);
 	return (i);
 }

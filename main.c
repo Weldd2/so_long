@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:07:31 by antoinemura       #+#    #+#             */
-/*   Updated: 2024/04/13 15:48:09 by amura            ###   ########.fr       */
+/*   Updated: 2024/05/26 11:04:09 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ void	close_program(t_map *map)
 	mlx_close_window(map->mlx);
 }
 
-static void	error(char *message)
+static void	error(char *message, t_map *map)
 {
+	if (map != NULL)
+	{
+		free_map(map);
+	}
 	ft_printf("Erreur\n%s\n", message);
 	exit(EXIT_FAILURE);
 }
@@ -68,28 +72,26 @@ static void	error(char *message)
 int	main(int argc, char **argv)
 {
 	mlx_t	*mlx;
-	char	**tiles;
 	t_map	*map;
+	char	**tiles;
 	int		x_l;
 	int		y_l;
 
 	if (argc < 2)
-		error("Le nombre d'argument n'est pas valide.\n");
+		error("Le nombre d'argument n'est pas valide.\n", NULL);
 	if (!est_rectangulaire(argv[1], &y_l, &x_l))
-		error("La carte indiquée n'est pas rectangulaire ou n'existe pas.");
+		error("La carte indiquée n'est pas rectangulaire ou existe pas.", NULL);
 	tiles = read_map(argv[1], y_l);
-	map = init_map(tiles, y_l, x_l, 1);
+	map = init_map(tiles, y_l, x_l);
 	if (!est_map_fermee(map) || !iterate_map(map, compteur_speciaux))
-		error("La carte n'est pas valide.");
+		error("La carte n'est pas valide.", map);
 	if ((map->c_count < 1 || map->e_count != 1 || map->p_count != 1)
 		|| !est_resoluble(map))
-		error("La carte n'est pas résoluble ou n'a pas assez de collectible.");
+		error("pas résoluble ou n'a pas assez de collectible.", map);
 	mlx = mlx_init(32 * map->x_l, 32 * map->y_l, "Minecraft", true);
 	fill_map(map, mlx);
 	map->mlx = mlx;
 	mlx_key_hook(mlx, &key_hook, map);
 	mlx_loop(mlx);
-	free_tiles_img(map);
-	mlx_terminate(map->mlx);
 	free_map(map);
 }

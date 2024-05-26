@@ -10,7 +10,7 @@ FTPRINTF = $(PRINTF_DIR)/libftprintf.a
 MLX42_LINUX = MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 MLX42_MAC = MLX42/build/libmlx42.a -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.9/lib/" -framework Cocoa -framework OpenGL -framework IOKit
 
-SRC = main.c validate_map.c map_utils.c map_structure.c move.c resoudre.c resoudre2.c
+SRC = main.c validate_map.c map_utils.c map_structure.c move.c resoudre.c resoudre2.c map_free.c
 OBJ = $(SRC:.c=.o)
 
 #change in CMakeLists.txt --> cmake_minimum_required (VERSION 3.16.0)
@@ -24,7 +24,7 @@ mac :
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(FTPRINTF) $(MLX42_MAC)
 
 debug : all
-	valgrind --keep-debuginfo=yes --leak-check=full --suppressions=valgrind_files/mlx42.supp ./so_long carte.ber
+	valgrind --keep-debuginfo=yes --show-leak-kinds=all --leak-check=full --suppressions=valgrind_files/mlx42.supp ./so_long test.ber
 
 submodule :
 	git submodule init

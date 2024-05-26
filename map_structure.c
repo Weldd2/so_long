@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 11:31:30 by antoinemura       #+#    #+#             */
-/*   Updated: 2024/04/13 15:48:05 by amura            ###   ########.fr       */
+/*   Updated: 2024/05/26 11:08:37 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,6 @@ void	init_tiles_img(t_map *map)
 			x++;
 		}
 		y++;
-	}
-}
-
-void	free_tiles_img(t_map *map)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	if (map->tiles_img != NULL && map->mlx != NULL)
-	{
-		while (map->y_l >= y)
-		{
-			x = 0;
-			while (map->x_l >= x)
-			{
-				mlx_delete_image(map->mlx, map->tiles_img[y][x]);
-				x++;
-			}
-			free(map->tiles_img[y]);
-			y++;
-		}
-		free(map->tiles_img);
 	}
 }
 
@@ -80,7 +57,7 @@ void	fill_map(t_map *map, mlx_t *mlx)
 	mlx_delete_texture(texture);
 }
 
-t_map	*init_map(char **tiles, int y_l, int x_l, int graph)
+t_map	*init_map(char **tiles, int y_l, int x_l)
 {
 	t_map	*map;
 
@@ -90,24 +67,10 @@ t_map	*init_map(char **tiles, int y_l, int x_l, int graph)
 	map->y_l = y_l;
 	map->tiles_img = NULL;
 	map->mlx = NULL;
-	if (graph)
-		init_tiles_img(map);
+	init_tiles_img(map);
 	map->c_count = 0;
 	map->e_count = 0;
 	map->p_count = 0;
 	return (map);
 }
 
-void	free_map(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i < map->y_l)
-	{
-		free(map->tiles[i]);
-		i++;
-	}
-	free(map->tiles);
-	free(map);
-}

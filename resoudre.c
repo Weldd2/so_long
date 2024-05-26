@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   resoudre.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:44:37 by antoinemura       #+#    #+#             */
-/*   Updated: 2024/04/06 21:49:18 by antoinemura      ###   ########.fr       */
+/*   Updated: 2024/05/26 10:31:47 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	g_directions[4][2] = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
 int	check_victory_condition(t_map *m)
 {
@@ -42,8 +40,9 @@ void	collect_collectible(t_map *m)
 
 int	explore_recursive(t_map *m, int direction_index)
 {
-	int	new_y;
-	int	new_x;
+	int					new_y;
+	int					new_x;
+	static const int	g_directions[4][2] = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
 	new_y = m->p_y + g_directions[direction_index][0];
 	new_x = m->p_x + g_directions[direction_index][1];

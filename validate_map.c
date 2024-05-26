@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:22:27 by antoinemura       #+#    #+#             */
-/*   Updated: 2024/04/07 03:14:02 by amura            ###   ########.fr       */
+/*   Updated: 2024/05/26 10:38:11 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	est_rectangulaire(char	*file_path, int *y_l, int *x_l)
 	if (map == 0)
 		return (0);
 	line = ft_get_next_line(map);
-	*x_l = (int)ft_strlen(line) - 1;
+	if (line != NULL)
+		*x_l = (int)ft_strlen(line) - 1;
 	while (line)
 	{
 		(*y_l)++;
@@ -55,9 +56,7 @@ int	est_rectangulaire(char	*file_path, int *y_l, int *x_l)
 		free(line);
 		line = ft_get_next_line(map);
 	}
-	free(line);
-	close(map);
-	return (1);
+	return (free(line), close(map), 1);
 }
 
 int	est_map_fermee(t_map *map)

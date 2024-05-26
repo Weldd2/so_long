@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:24:07 by antoinemura       #+#    #+#             */
-/*   Updated: 2024/05/26 02:19:46 by amura            ###   ########.fr       */
+/*   Updated: 2024/05/26 11:04:35 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		open_map(char	*file_path);
 char	**read_map(char *file_path, int y_l);
 int		est_rectangulaire(char	*file_path, int *y_l, int *x_l);
 int		est_map_fermee(t_map *map);
-t_map	*init_map(char **tiles, int y_l, int x_l, int graph);
+t_map	*init_map(char **tiles, int y_l, int x_l);
 void	free_tiles_img(t_map *map);
 void	fill_map(t_map *map, mlx_t *mlx);
 void	put_image(int x, int y, t_map *map, mlx_t *mlx);
