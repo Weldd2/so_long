@@ -2,5 +2,4 @@ so_long
 *.json
 .vscode
 *.o
-MLX42
 valgrind_files
